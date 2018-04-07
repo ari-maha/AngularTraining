@@ -1,0 +1,1 @@
+Sample Project to be used for Angular training
