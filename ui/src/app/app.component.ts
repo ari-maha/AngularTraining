@@ -47,7 +47,6 @@ export class AppComponent implements OnInit {
   }
 
   goToRoute(tabObject : TabSettings) : void {
-    console.log(tabObject);
     if (!tabObject.active) {
       this.router.navigate([tabObject.navigateTo]);
     }

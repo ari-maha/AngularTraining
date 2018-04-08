@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 	try {
 		payload.forEach(element => {
 			if (!element.name) {
-				throw("Name not found for vertical");
+				throw("Name not found for unit");
 			}
 			col.insert({
 				id : ++colCount,

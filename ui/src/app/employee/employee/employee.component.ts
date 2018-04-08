@@ -5,6 +5,9 @@ import 'rxjs/add/operator/switchMap';
 import { ObservableInput } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
+import { EmployeeService } from '../employee.service';
+import { Employee } from '../employee';
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -16,19 +19,18 @@ export class EmployeeComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private empService : EmployeeService
+  ) { 
+    
+  }
 
   ngOnInit() : void {
-    console.log(this.route.snapshot.paramMap.get('unitId'));
-    this.route.paramMap.switchMap((params : ParamMap, index : number) : ObservableInput<{}> => {
-      console.log(params.get('unitId'));
-      return of({});
+    this.route.paramMap.switchMap((params : ParamMap) : ObservableInput<Employee> => {
+      return this.empService.getEmployees(parseInt(params.get('unitId'),10));
+    }).subscribe((response : any)=>{
+      let result = <Employee[]>response;
+      console.log(result) ;
     });
   }
-
-  goToUnitPage() : void {
-    this.router.navigate(['units']);
-  }
-
 }
