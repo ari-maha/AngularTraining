@@ -24,7 +24,7 @@
       <th scope="row"> {{ employee.empId }} </th>
       <th> {{ employee.name }}</th>
       <th> {{ employee.unitName }} </th>
-      <th> {{ employee.age }}</th>
+      <th> {{ employee.age | addYearToAge}}</th>
     </tr>
   </table>
 </div>

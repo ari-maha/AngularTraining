@@ -7,9 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { UnitModule } from './unit/unit.module';
 import { EmployeeModule } from './employee/employee.module';
-import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AppComponent } from './app.component';
+import { TabsModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     UnitModule,
     EmployeeModule,
     AppRoutingModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    SharedModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

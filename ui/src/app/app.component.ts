@@ -20,12 +20,12 @@ export class AppComponent implements OnInit {
 
   constructor(private router : Router, private ngZone : NgZone) {
     this.tabSettings = [{
-      heading : "Units",
-      navigateTo : "units",
-      active : false
-    }, {
       heading : "Employees",
       navigateTo : "employees",
+      active : false
+    }, {
+      heading : "Units",
+      navigateTo : "units",
       active : false
     }]
   }

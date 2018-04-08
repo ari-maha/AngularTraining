@@ -7,10 +7,13 @@ import { ButtonsModule, ModalModule } from 'ngx-bootstrap';
 import { EmployeeService } from './employee.service';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     ModalModule.forRoot(),
     ButtonsModule.forRoot()
   ],
