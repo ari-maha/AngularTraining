@@ -7,6 +7,8 @@ import { UnitModule } from './unit/unit.module';
 import { EmployeeModule } from './employee/employee.module';
 import { AppComponent } from './app.component';
 
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     UnitModule,
     EmployeeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
