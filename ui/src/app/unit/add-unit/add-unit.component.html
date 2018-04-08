@@ -1,0 +1,29 @@
+<form [formGroup]="addUnitFormGroup" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add New Business Unit</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="center-block">*Business Unit Name:
+        <input class="form-control" formControlName="unitName">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="center-block">*Business Unit Description:
+        <textarea class="form-control" formControlName="unitDescription"></textarea>
+      </label>
+    </div>
+    
+    <div class="display-error" *ngIf="formHasError">
+      Please check if any of the fields are missing.
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit"
+          [disabled]="addUnitFormGroup.pristine" class="btn btn-success">Save</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Discard</button>
+  </div>  
+</form>

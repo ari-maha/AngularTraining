@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmployeeComponent } from './employee/employee.component';
-import { ButtonsModule, BsDropdownModule } from 'ngx-bootstrap';
+import { ButtonsModule, ModalModule } from 'ngx-bootstrap';
 
 import { EmployeeService } from './employee.service';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ButtonsModule.forRoot(),
-    BsDropdownModule.forRoot()
+    ModalModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers : [ EmployeeService ],
-  declarations: [EmployeeComponent]
+  entryComponents : [AddEmployeeComponent],
+  declarations: [EmployeeComponent, AddEmployeeComponent]
 })
 export class EmployeeModule { }

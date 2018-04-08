@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
+import { ReactiveFormsModule }    from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,6 +19,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     UnitModule,
     EmployeeModule,

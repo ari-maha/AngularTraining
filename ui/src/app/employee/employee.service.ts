@@ -19,8 +19,8 @@ export class EmployeeService {
     return this.http.get("api/verticals");
   }
 
-  addEmployee(payload : any) {
-    return this.http.post(this.baseUrl, payload);
+  addEmployee(unitId : string, payload : any) {
+    return this.http.post(`${this.baseUrl}/${unitId}`, payload);
   }
 
 }

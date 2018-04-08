@@ -9,6 +9,11 @@ import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
 import { Unit } from '../../unit/unit';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -17,6 +22,7 @@ import { Unit } from '../../unit/unit';
 export class EmployeeComponent implements OnInit {
 
   public selectedId : string;
+  public bsModalRef: BsModalRef;
   public employeeList : Employee[] = [];
   public unitList : Unit[] = [];
 
@@ -24,7 +30,8 @@ export class EmployeeComponent implements OnInit {
     private router : Router,
     private route: ActivatedRoute,
     private ngZone : NgZone,
-    private empService : EmployeeService
+    private empService : EmployeeService,
+    private modalService: BsModalService
   ) { 
     
   }
@@ -60,5 +67,24 @@ export class EmployeeComponent implements OnInit {
       return;
     }
     this.router.navigate(['employees', this.selectedId]);
+  }
+
+  openAddEmployee() : void {
+    const initialState = {
+      parentContext : this,
+      unitList : this.unitList
+    }
+    this.bsModalRef = this.modalService.show(AddEmployeeComponent, {initialState});
+  }
+
+  addNewEmployee(formDetails : any) : void {
+    this.empService.addEmployee(formDetails.selectedUnit, formDetails).subscribe((response : any)=>{
+      this.ngZone.run(() => {
+        this.selectedId = formDetails.selectedUnit;
+        this.employeeList = <Employee[]>response;
+      });
+    }, (response) => {
+      alert("Unable to save data. Please check server logs");
+    });
   }
 }

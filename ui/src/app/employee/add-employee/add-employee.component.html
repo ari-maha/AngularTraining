@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add New Employee</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="center-block">*Business Unit:
+          <select name="businessUnit" [(ngModel)]="formDetails.selectedUnit" required>
+            <option disabled selected> None</option>
+            <option *ngFor="let unit of unitList" value="{{ unit.id }}">{{ unit.name }}</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">*Employee Name:
+          <input name="name" type="text" class="form-control" [(ngModel)]="formDetails.name" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">*Employee Age:
+            <input name="age" type="number" class="form-control" [(ngModel)]="formDetails.age" required>
+        </label>
+      </div>
+      
+      <div class="display-error" *ngIf="formHasError">
+        Please check if any of the fields are missing.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success">Save</button>
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Discard</button>
+    </div>  
+  </form>  

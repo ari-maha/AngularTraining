@@ -1,6 +1,6 @@
 <br/>
 <div class="row row-float">
-  <button type="button" class="btn btn-primary">Add Employee</button>
+  <button type="button" class="btn btn-primary" (click)="openAddEmployee()">Add Employee</button>
   <div class="float-right" *ngIf="unitList.length > 0" (change)="changedUnit()">
     Select Unit : 
     <select [(ngModel)]="selectedId">
