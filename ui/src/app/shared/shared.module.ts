@@ -6,7 +6,7 @@ import { AddYearToAgePipe } from './add-year-to-age.pipe';
   imports: [
     CommonModule
   ],
-  exports : [],
+  exports : [AddYearToAgePipe],
   declarations: [AddYearToAgePipe]
 })
 export class SharedModule { }
