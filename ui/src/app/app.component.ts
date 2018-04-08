@@ -35,6 +35,9 @@ export class AppComponent implements OnInit {
     .filter(event => event instanceof NavigationStart)
     .subscribe((event:NavigationStart) => {
       let currentPath = event.url.split("/")[1];
+      if (!currentPath) {
+        currentPath = 'employees';
+      }
       this.ngZone.run(()=> {
         this.tabSettings.forEach((tab : TabSettings) => {
           tab.active = false;
