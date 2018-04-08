@@ -1,0 +1,8 @@
+.selectabled {
+    cursor: pointer;
+}
+
+.row-float {
+    padding : 0 10px;
+    display: block !important;
+}

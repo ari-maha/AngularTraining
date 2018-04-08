@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -7,6 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
+import { Unit } from '../../unit/unit';
 
 @Component({
   selector: 'app-employee',
@@ -15,22 +16,49 @@ import { Employee } from '../employee';
 })
 export class EmployeeComponent implements OnInit {
 
-  public isUnitSelected : boolean = false;
+  public selectedId : string;
+  public employeeList : Employee[] = [];
+  public unitList : Unit[] = [];
 
   constructor(
     private router : Router,
     private route: ActivatedRoute,
+    private ngZone : NgZone,
     private empService : EmployeeService
   ) { 
     
   }
 
+  getUnits()  :void {
+    this.empService.getVerticals().subscribe((response : any) => {
+      this.ngZone.run(() => {
+        this.unitList = <Unit[]>response;
+      });
+    });
+  }
+
   ngOnInit() : void {
+    this.getUnits();
     this.route.paramMap.switchMap((params : ParamMap) : ObservableInput<Employee> => {
+      if (parseInt(params.get('unitId'),10)) {
+        this.selectedId = params.get('unitId');
+      }
+      else {
+        this.selectedId = "0";
+      }
       return this.empService.getEmployees(parseInt(params.get('unitId'),10));
     }).subscribe((response : any)=>{
-      let result = <Employee[]>response;
-      console.log(result) ;
+      this.ngZone.run(() => {
+        this.employeeList = <Employee[]>response;
+      });
     });
+  }
+
+  changedUnit() : void {
+    if (this.selectedId === "0") {
+      this.router.navigate(['employees']);
+      return;
+    }
+    this.router.navigate(['employees', this.selectedId]);
   }
 }

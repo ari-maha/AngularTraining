@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Unit } from '../unit';
 import { Router } from '@angular/router';
 import { UnitService } from '../unit.service';
@@ -10,11 +10,19 @@ import { UnitService } from '../unit.service';
 })
 export class UnitComponent implements OnInit {
 
-  constructor(private router : Router, private unitService : UnitService) { }
+  public unitList : Unit[] = [];
+
+  constructor(private router : Router, private unitService : UnitService, private ngZone : NgZone) { }
 
   ngOnInit() {
-    this.unitService.getUnits().subscribe((result : Unit[]) => {
-      console.log(result);
+    this.unitService.getUnits().subscribe((response : any)=>{
+      this.ngZone.run(() => {
+        this.unitList = <Unit[]>response;
+      });
     })
+  }
+
+  unitSelected(unitId : number) : void {
+    this.router.navigate(['employees', unitId]);
   }
 }

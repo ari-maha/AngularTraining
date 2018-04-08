@@ -19,5 +19,4 @@ export class UnitService {
   editUnit(unitId : number, payload) {
     return this.http.post(`${this.baseUrl}/${unitId}`, payload);
   }
-
 }

@@ -1,3 +1,30 @@
+<br/>
+<div class="row row-float">
+  <button type="button" class="btn btn-primary">Add Employee</button>
+  <div class="float-right" *ngIf="unitList.length > 0" (change)="changedUnit()">
+    Select Unit : 
+    <select [(ngModel)]="selectedId">
+      <option value="0"> None</option>
+      <option *ngFor="let unit of unitList" value="{{ unit.id }}">{{ unit.name }}</option>
+    </select>
+  </div>
+</div>
+<br/>
 <div class="row">
-  employee works!
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>  
+        <th scope="col">Employee Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Unit Name</th>
+        <th scope="col">Age</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let employee of employeeList">
+      <th scope="row"> {{ employee.empId }} </th>
+      <th> {{ employee.name }}</th>
+      <th> {{ employee.unitName }} </th>
+      <th> {{ employee.age }}</th>
+    </tr>
+  </table>
 </div>

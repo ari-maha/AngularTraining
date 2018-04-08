@@ -1,3 +1,23 @@
-<p>
-  unit works!
-</p>
+<br/>
+<div class="row row-float">
+  <button type="button" class="btn btn-primary">Add Unit</button>
+</div>
+<br/>
+<div class="row">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>  
+        <th scope="col">Unit Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Employee Count</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let unit of unitList" class="selectabled" role="button" (click)="unitSelected(unit.id)">
+      <th scope="row"> {{ unit.id }} </th>
+      <th> {{ unit.name }}</th>
+      <th> {{ unit.description }} </th>
+      <th> {{ unit.employeeCount }}</th>
+    </tr>
+  </table>
+</div>

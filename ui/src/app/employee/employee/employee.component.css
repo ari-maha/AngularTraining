@@ -1,0 +1,13 @@
+.float-right {
+    height : 38px;
+    float: right;
+}
+
+.float-right > select {
+    height : 38px;
+}
+
+.row-float {
+    padding : 0 10px;
+    display: block !important;
+}
