@@ -58,3 +58,5 @@ typings/
 .env
 
 server/employee.json
+
+package-lock.json
