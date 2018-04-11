@@ -21,25 +21,23 @@ router.post('/', (req, res) => {
 		});
 	}
 
-	if (!(payload && payload.length)) {
+	if (!payload) {
 		res.statusCode = 400;
-		res.statusMessage = "Payload does not exist or is not an array";
+		res.statusMessage = "Payload is incorrect";
 
 		res.send();
 		return;
 	}
 	let colCount = col.count();
 	try {
-		payload.forEach(element => {
-			if (!element.name) {
-				throw("Name not found for vertical");
-			}
-			col.insert({
-				id : ++colCount,
-				name : element.name,
-				description : element.description ? element.description : "",
-				employeeCount : 0
-			})
+		if (!payload.name) {
+			throw("Name not found for unit");
+		}
+		col.insert({
+			id : ++colCount,
+			name : payload.name,
+			description : payload.description ? payload.description : "",
+			employeeCount : 0
 		});
 	}
 	catch (ex) {
