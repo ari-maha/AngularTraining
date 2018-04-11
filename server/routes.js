@@ -8,7 +8,7 @@ module.exports = function(app) {
 
 	var path = require('path');
 
-  	app.use('/api/verticals', require('./api/verticals'));
-  	app.use('/api/employees', require('./api/employees'));
+  	app.use('/api/verticals', require('./api/').unit);
+  	app.use('/api/employees', require('./api/').employee);
 
 };
