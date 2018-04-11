@@ -31,7 +31,9 @@ router.post('/:unitId', (req, res) => {
 	}
 	let colCount = col.count();
 	try {
+		console.log(unitId);
 		let unitResult = vCol.findOne( { id : parseInt(unitId,10) });
+		console.log(unitResult);
 		if (!unitResult) {
 			res.statusCode = 404;
 			res.statusMessage = "unit not found";
@@ -60,10 +62,10 @@ router.post('/:unitId', (req, res) => {
 		res.send();
 		return;
 	}
-	res.statusCode = 200;
-	res.send(col.chain().find({ unit : unitId }).data());
 	col.commit();
 	vCol.commit();
+	res.statusCode = 200;
+	res.send(col.chain().find({ unit : unitId }).data());
 	lokiDb.saveDatabase();
 });
 
