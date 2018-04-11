@@ -28,26 +28,26 @@ let eCol = lokiDb.addCollection( config.databaseConfig.employeeKeyName, {
 eCol.insert([{
     empId : 1,
     name : "Dennis Ritchie",
-    vertical : 1,
-    verticalName : "BFSI",
+    unit : 1,
+    unitName : "BFSI",
     age : 30
 }, {
     empId : 2,
     name : "Brian Kernighan",
-    vertical : 1,
-    verticalName : "BFSI",
+    unit : 1,
+    unitName : "BFSI",
     age : 25
 }, {
     empId : 3,
     name : "James Gosling",
-    vertical : 2,
-    verticalName : "Retail",
+    unit : 2,
+    unitName : "Retail",
     age : 24
 }, {
     empId : 4,
     name : "Guido van Rossum",
-    vertical : 2,
-    verticalName : "Retail",
+    unit : 2,
+    unitName : "Retail",
     age : 22
 }]);
 
