@@ -46,17 +46,21 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() : void {
     this.getUnits();
-    this.route.paramMap.switchMap((params : ParamMap) : ObservableInput<Employee> => {
+    this.route.paramMap.switchMap((params : ParamMap) : ObservableInput<Employee[]> => {
       if (parseInt(params.get('unitId'),10)) {
         this.selectedId = params.get('unitId');
       }
       else {
         this.selectedId = "0";
+        this.employeeList = <Employee[]>this.route.snapshot.data.message;
+        return [];
       }
       return this.empService.getEmployees(parseInt(params.get('unitId'),10));
-    }).subscribe((response : any)=>{
+    }).subscribe((response : any[])=>{
       this.ngZone.run(() => {
-        this.employeeList = <Employee[]>response;
+        if (response && response.length) {
+          this.employeeList = <Employee[]>response;
+        }
       });
     });
   }

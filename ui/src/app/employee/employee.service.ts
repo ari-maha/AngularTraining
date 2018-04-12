@@ -5,7 +5,7 @@ import { Resolve } from '@angular/router';
 
 
 @Injectable()
-export class EmployeeService implements Resolve<Promise<boolean>>{
+export class EmployeeService implements Resolve<Promise<any[]>>{
 
   private baseUrl = "api/employees";
 
@@ -15,14 +15,14 @@ export class EmployeeService implements Resolve<Promise<boolean>>{
 
   constructor(private http : HttpClient) { }
 
-  fetchEmployees() : Promise<boolean>{
+  fetchEmployees() : Promise<any[]>{
       return new Promise((resolve) => {
         this.http.get(this.baseUrl).subscribe((result : any[]) => {
             if (result && result.length) {
-				resolve(true);
+				resolve(result);
 			}
 			else {
-				resolve(false);
+				resolve([]);
 			}
         })
       })

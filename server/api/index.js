@@ -6,6 +6,17 @@ let loki = require('lokijs');
 let lokiDb = new loki(config.databaseConfig.databaseName);
 lokiDb.loadDatabase(lokiDatabase);
 
+function sendResponse(response, newObject) {
+    setTimeout(() => {
+        if (newObject) {
+            response.send(newObject);
+        }
+        else {
+            response.send();
+        }
+    }, 2000);
+}
+
 function getEmployeeRouter() {
     let router = express.Router();
 
@@ -27,7 +38,7 @@ function getEmployeeRouter() {
             res.statusCode = 400;
             res.statusMessage = "Please check payload";
 
-            res.send();
+            sendResponse(res, null);
             return;
         }
         let colCount = col.count();
@@ -36,7 +47,7 @@ function getEmployeeRouter() {
             if (!unitResult) {
                 res.statusCode = 404;
                 res.statusMessage = "unit not found";
-                res.send();
+                sendResponse(res, null);
                 return;
             }
             if (!payload.name || !payload.age) {
@@ -58,13 +69,13 @@ function getEmployeeRouter() {
             vCol.rollback();
             res.statusCode = 400;
             res.statusMessage = ex.message;
-            res.send();
+            sendResponse(res, null);
             return;
         }
         col.commit();
         vCol.commit();
         res.statusCode = 200;
-        res.send(col.chain().find({ unit : parseInt(unitId,10) }).data());
+        sendResponse(res,col.chain().find({ unit : parseInt(unitId,10) }).data());
         lokiDb.saveDatabase();
     });
 
@@ -77,11 +88,11 @@ function getEmployeeRouter() {
 
         if (!col) {
             res.statusCode = 204;
-            res.send([]);
+            sendResponse(res,[]);
         }
         else {
             res.statusCode = 200;
-            res.send(col.chain().find({ unit : parseInt(req.params.unitId,10) }).data());
+            sendResponse(res,col.chain().find({ unit : parseInt(req.params.unitId,10) }).data());
         }
     });
 
@@ -94,11 +105,11 @@ function getEmployeeRouter() {
 
         if (!col) {
             res.statusCode = 204;
-            res.send([]);
+            sendResponse(res,[]);
         }
         else {
             res.statusCode = 200;
-            res.send(col.data);
+            sendResponse(res,col.data);
         }
     });
 
@@ -125,7 +136,7 @@ function getUnitRouter() {
             res.statusCode = 400;
             res.statusMessage = "Payload is incorrect";
 
-            res.send();
+            sendResponse(res, null);
             return;
         }
         let colCount = col.count();
@@ -145,11 +156,11 @@ function getUnitRouter() {
             res.statusCode = 400;
             res.statusMessage = ex.message;
             
-            res.send();
+            sendResponse(res, null);
             return;
         }
         res.statusCode = 200;
-        res.send(col.data);
+        sendResponse(res, col.data);
         col.commit();
         lokiDb.saveDatabase();
     });
@@ -162,11 +173,11 @@ function getUnitRouter() {
 
         if (!col) {
             res.statusCode = 204;
-            res.send([]);
+            sendResponse(res, []);
         }
         else {
             res.statusCode = 200;
-            res.send(col.data);
+            sendResponse(res, col.data);
         }
     });
 
@@ -183,7 +194,7 @@ function getUnitRouter() {
             statusCode = 204;
         }
         res.statusCode = statusCode;
-        res.send(resultSet);
+        sendResponse(res, resultSet);
     });
 
     router.post('/:id',function(req,res){
@@ -197,13 +208,13 @@ function getUnitRouter() {
 
         if (!verticalColumn) {
             res.statusCode = 404;
-            res.send();
+            sendResponse(res, null);
             return;
         }
         verticalColumn["description"] = payload["description"];
         col.update(verticalColumn);
         res.statusCode = 200;
-        res.send(col.data);
+        sendResponse(res, col.data);
         col.commit();
         lokiDb.saveDatabase();
     });
