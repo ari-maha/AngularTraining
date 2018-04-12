@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Observable } from 'rxjs/Observable';
 import { Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 
 @Injectable()
-export class EmployeeService implements Resolve<Promise<any[]>>{
+export class EmployeeService implements Resolve<Observable<any>>{
 
   private baseUrl = "api/employees";
 
-	resolve() {
-		return this.fetchEmployees();
+	resolve(route: ActivatedRouteSnapshot) {
+		return this.fetchEmployees(route.paramMap.get('unitId'));
 	}
 
   constructor(private http : HttpClient) { }
 
-  fetchEmployees() : Promise<any[]>{
-      return new Promise((resolve) => {
-        this.http.get(this.baseUrl).subscribe((result : any[]) => {
-            if (result && result.length) {
-				resolve(result);
-			}
-			else {
-				resolve([]);
-			}
-        })
-      })
+  fetchEmployees(unitId : string) : Observable<any>{
+    	return this.http.get(this.baseUrl)
   }
 
   getEmployees(unitId : number) {

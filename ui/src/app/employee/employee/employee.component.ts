@@ -52,7 +52,7 @@ export class EmployeeComponent implements OnInit {
       }
       else {
         this.selectedId = "0";
-        this.employeeList = <Employee[]>this.route.snapshot.data.message;
+        this.employeeList = <Employee[]>this.route.snapshot.data.empData;
         return [];
       }
       return this.empService.getEmployees(parseInt(params.get('unitId'),10));

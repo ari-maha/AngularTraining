@@ -8,7 +8,7 @@ import { UnitGuardService } from './unit-guard.service';
 
 const appRoutes: Routes = [
     { path : 'units' , component : UnitComponent, canActivate : [UnitGuardService],  pathMatch : 'full'},
-    { path : 'employees' , component : EmployeeComponent, resolve : { message : EmployeeService }, pathMatch : 'full'},
+    { path : 'employees' , component : EmployeeComponent, resolve : { empData : EmployeeService }, pathMatch : 'full'},
     { path : 'employees/:unitId' , component : EmployeeComponent, pathMatch : 'full'},
     { path: '**',   redirectTo: '/employees', pathMatch: 'full' }
   ];
