@@ -1,12 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable()
-export class EmployeeService {
+import { Resolve } from '@angular/router';
 
-  private baseUrl = "api/employees"
+
+@Injectable()
+export class EmployeeService implements Resolve<Promise<boolean>>{
+
+  private baseUrl = "api/employees";
+
+	resolve() {
+		return this.fetchEmployees();
+	}
 
   constructor(private http : HttpClient) { }
+
+  fetchEmployees() : Promise<boolean>{
+      return new Promise((resolve) => {
+        this.http.get(this.baseUrl).subscribe((result : any[]) => {
+            if (result && result.length) {
+				resolve(true);
+			}
+			else {
+				resolve(false);
+			}
+        })
+      })
+  }
 
   getEmployees(unitId : number) {
     if (!unitId) {

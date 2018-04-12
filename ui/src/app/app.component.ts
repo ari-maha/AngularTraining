@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/filter';
 
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() : void {
     this.router.events
-    .filter(event => event instanceof NavigationStart)
-    .subscribe((event:NavigationStart) => {
+    .filter(event => event instanceof NavigationEnd)
+    .subscribe((event:NavigationEnd) => {
       let currentPath = event.url.split("/")[1];
       if (!currentPath) {
         currentPath = 'employees';

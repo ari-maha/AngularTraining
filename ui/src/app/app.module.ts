@@ -12,6 +12,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { TabsModule } from 'ngx-bootstrap';
 
+import { UnitGuardService } from './unit-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { TabsModule } from 'ngx-bootstrap';
     TabsModule.forRoot(),
     SharedModule
   ],
-  providers: [ ],
+  providers: [ UnitGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
