@@ -5,10 +5,12 @@ import { ButtonsModule, ModalModule } from 'ngx-bootstrap';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { UnitService } from './unit.service';
 import { AddUnitComponent } from './add-unit/add-unit.component';
+import { routing } from './unit-routing';
 
 @NgModule({
   imports: [
     CommonModule,
+    routing,
     ReactiveFormsModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot()
