@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { ReactiveFormsModule }    from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +30,23 @@ import { UnitGuardService } from './unit-guard.service';
     TabsModule.forRoot(),
     SharedModule
   ],
-  providers: [ UnitGuardService ],
+  providers: [ 
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => {
+        return () => {
+          return new Promise((resolve, reject) => {
+            console.log("Init Start");
+            setTimeout(() => {
+              console.log("Init End");
+              resolve();
+            }, 5000);
+          });
+        }
+      },
+      multi: true
+    }, 
+    UnitGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
