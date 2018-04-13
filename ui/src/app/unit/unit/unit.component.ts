@@ -15,6 +15,7 @@ import { AddUnitComponent } from '../add-unit/add-unit.component';
 })
 export class UnitComponent implements OnInit {
 
+  title = "Unit Component";
   public bsModalRef: BsModalRef;
   public unitList : Unit[] = [];
 
@@ -23,7 +24,9 @@ export class UnitComponent implements OnInit {
     private unitService : UnitService, 
     private ngZone : NgZone,
     private modalService: BsModalService
-  ) { }
+  ) { 
+    console.log(this.title);
+  }
 
   ngOnInit() {
     this.unitService.getUnits().subscribe((response : any)=>{

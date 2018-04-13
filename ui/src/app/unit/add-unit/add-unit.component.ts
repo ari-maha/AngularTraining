@@ -9,12 +9,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class AddUnitComponent implements OnInit {
 
+  title = "Add unit Component";
   public addUnitFormGroup : FormGroup;
   public formHasError : boolean = false;
 
   public parentContext : any;
   
-  constructor(private fb: FormBuilder, public bsModalRef: BsModalRef) { }
+  constructor(private fb: FormBuilder, public bsModalRef: BsModalRef) { 
+    console.log(this.title);
+  }
 
   ngOnInit() {
     this.addUnitFormGroup = this.fb.group({

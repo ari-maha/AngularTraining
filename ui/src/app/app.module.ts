@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { ReactiveFormsModule }    from '@angular/forms';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, APP_BOOTSTRAP_LISTENER, ComponentRef } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,13 @@ import { UnitGuardService } from './unit-guard.service';
       },
       multi: true
     }, 
+    {
+      provide: APP_BOOTSTRAP_LISTENER, multi: true, useFactory: () => {
+        return (component: ComponentRef<any>) => {
+          console.log(component.instance.title);
+        }
+      }
+    },
     UnitGuardService ],
   bootstrap: [AppComponent]
 })

@@ -16,6 +16,7 @@ interface TabSettings {
 })
 export class AppComponent implements OnInit {
 
+  title = "Root Component";
   public tabSettings : TabSettings[];
 
   constructor(private router : Router, private ngZone : NgZone) {

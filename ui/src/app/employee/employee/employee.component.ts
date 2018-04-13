@@ -21,6 +21,7 @@ import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 })
 export class EmployeeComponent implements OnInit {
 
+  title = "Employee Component";
   public selectedId : string;
   public bsModalRef: BsModalRef;
   public employeeList : Employee[] = [];
@@ -33,7 +34,7 @@ export class EmployeeComponent implements OnInit {
     private empService : EmployeeService,
     private modalService: BsModalService
   ) { 
-    
+    console.log(this.title);
   }
 
   getUnits()  :void {

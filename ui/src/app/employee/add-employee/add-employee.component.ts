@@ -8,6 +8,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class AddEmployeeComponent implements OnInit {
 
+  title = "Add Employee Component";
   public formDetails = {
     selectedUnit : null,
     name : null,
@@ -18,7 +19,9 @@ export class AddEmployeeComponent implements OnInit {
   public parentContext : any;
   public unitList : any[];
 
-  constructor(public bsModalRef: BsModalRef) { }
+  constructor(public bsModalRef: BsModalRef) { 
+    console.log(this.title);
+  }
 
   ngOnInit() {
   }
